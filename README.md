@@ -1,0 +1,2 @@
+# cloakmate
+a hidden friend
