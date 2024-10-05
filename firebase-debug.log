@@ -1,0 +1,51 @@
+[debug] [2024-10-05T06:11:07.368Z] ----------------------------------------------------------------------
+[debug] [2024-10-05T06:11:07.370Z] Command:       /usr/local/share/nvm/versions/node/v20.17.0/bin/node /home/codespace/nvm/current/bin/firebase init
+[debug] [2024-10-05T06:11:07.371Z] CLI Version:   13.20.2
+[debug] [2024-10-05T06:11:07.371Z] Platform:      linux
+[debug] [2024-10-05T06:11:07.371Z] Node Version:  v20.17.0
+[debug] [2024-10-05T06:11:07.371Z] Time:          Sat Oct 05 2024 06:11:07 GMT+0000 (Coordinated Universal Time)
+[debug] [2024-10-05T06:11:07.371Z] Env Overrides: GITHUB_API_URL
+[debug] [2024-10-05T06:11:07.371Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-10-05T06:11:07.375Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-10-05T06:11:07.375Z] > authorizing via signed-in user (tirupathiraokottisa1998@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /workspaces/cloakmate
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-10-05T06:11:28.577Z] Checked if tokens are valid: true, expires at: 1728111871217
+[debug] [2024-10-05T06:11:28.577Z] Checked if tokens are valid: true, expires at: 1728111871217
+[debug] [2024-10-05T06:11:28.579Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2024-10-05T06:11:29.250Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2024-10-05T06:11:29.250Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project cloakmate-d02af (cloakmate) 
+[info] 
+=== Hosting Setup
+[debug] [2024-10-05T06:11:31.807Z] Checked if tokens are valid: true, expires at: 1728111871217
+[debug] [2024-10-05T06:11:31.807Z] Checked if tokens are valid: true, expires at: 1728111871217
+[debug] [2024-10-05T06:11:31.807Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/cloakmate-d02af [none]
+[debug] [2024-10-05T06:11:32.168Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/cloakmate-d02af 200
+[debug] [2024-10-05T06:11:32.169Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/cloakmate-d02af {"projectId":"cloakmate-d02af","projectNumber":"185997864900","displayName":"cloakmate","name":"projects/cloakmate-d02af","resources":{"hostingSite":"cloakmate-d02af"},"state":"ACTIVE","etag":"1_80c7fde8-2b40-4072-9994-d044ce300ef4"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 

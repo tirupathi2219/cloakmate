@@ -24,8 +24,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <div className="flex flex-col h-screen">
         <MainHeader/>
+        <div className="grow bg-gradient-to-r from-[#eab308] to-[#1faed942]">
         {children}
+        </div>
+        </div>
+        
       </body>
     </html>
   );
