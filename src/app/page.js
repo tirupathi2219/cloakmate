@@ -1,4 +1,4 @@
-import Userdetails from "./components/userdetails";
+import Userdetails from "@/components/userdetails";
 
 export default function Home() {
   return (
