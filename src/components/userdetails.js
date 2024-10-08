@@ -1,38 +1,70 @@
 "use client"
 import { useEffect, useState } from "react"
-import { auth } from "@/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth"
+// import { auth } from "@/firebase";
+// import { createUserWithEmailAndPassword } from "firebase/auth"
 
 export default function Userdetails() {
     const [userinfo, setUserinfo] = useState({
-        Username: "",
+        username: "",
         email: "",
         phoneno: "",
         password: ""
     })
-    const { Username, email, phoneno, password } = userinfo
+    const [error, setError] = useState(null)
+    const { username, email, phoneno, password } = userinfo
+
     console.log(userinfo, userinfo.length, "===")
     const handlechange = (e) => {
         setUserinfo({ ...userinfo, [e.target.name]: e.target.value })
     }
     const handlesubmit = (e) => {
-        e.preventDefault()
-        if (Username && email && phoneno && password) {
-            alert("submitted")
-            createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-                const user = userCredential.user;
-                console.log("credential")
-            })
-            setUserinfo({
-                Username: "",
-                email: "",
-                phoneno: "",
-                password: ""
-            })
+        e.preventDefault();
+        if (username && email && phoneno && password) {
+
+
+            (async () => {
+                try {
+                    const response = await fetch('/api/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: 'exampleUser', // User registration data
+                            password: 'examplePassword',
+                        }),
+                    });
+
+                    if (!response.ok) {
+                        const data = await response.json();
+                        throw new Error(data.error);
+                    }
+
+                    const data = await response.json();
+                    setMessage(data.message); // Display success message
+                } catch (err) {
+                    setError(err.message); // Display error message
+                }
+            })()
+            console.log('error:::', error)
+
+            // createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            //     const user = userCredential.user;
+            //     console.log("credential")
+            // })
+            // setUserinfo({
+            //     username: "",
+            //     email: "",
+            //     phoneno: "",
+            //     password: ""
+            // })
         } else {
             alert("please fill the details")
         }
+
+
     }
+
 
 
 
@@ -75,8 +107,8 @@ export default function Userdetails() {
                         <input
                             type="text"
                             placeholder="username"
-                            name="Username"
-                            value={Username}
+                            name="username"
+                            value={username}
                             onChange={handlechange}
                             required
                             className=" border border-slate-900 p-1 rounded-lg m-2"

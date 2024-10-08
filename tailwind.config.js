@@ -18,7 +18,7 @@ module.exports = {
         }
       },
       animation: {
-        zigzag: 'zigzag 10s ease-out forwards',
+        zigzag: 'zigzag 5s ease-out forwards',
       },
     },
   },
