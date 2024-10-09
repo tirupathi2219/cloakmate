@@ -1,16 +1,20 @@
 "use client"
-import { useEffect, useState } from "react"
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 // import { auth } from "@/firebase";
 // import { createUserWithEmailAndPassword } from "firebase/auth"
 
 export default function Userdetails() {
+    const route = useRouter()
     const [userinfo, setUserinfo] = useState({
         username: "",
         email: "",
         phoneno: "",
         password: ""
     })
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
+    const [message, setMessage] = useState(null)
     const { username, email, phoneno, password } = userinfo
 
     console.log(userinfo, userinfo.length, "===")
@@ -19,9 +23,8 @@ export default function Userdetails() {
     }
     const handlesubmit = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         if (username && email && phoneno && password) {
-
-
             (async () => {
                 try {
                     const response = await fetch('/api/auth/register', {
@@ -30,8 +33,11 @@ export default function Userdetails() {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            username: 'exampleUser', // User registration data
-                            password: 'examplePassword',
+                            username: username, // User registration data
+                            password: password,
+                            phoneno: phoneno,
+                            email: email
+
                         }),
                     });
 
@@ -39,30 +45,19 @@ export default function Userdetails() {
                         const data = await response.json();
                         throw new Error(data.error);
                     }
-
                     const data = await response.json();
                     setMessage(data.message); // Display success message
+                    console.log("50:::",);
+                    route.push(`/chat?user=${JSON.stringify(data.user)}`);
+                    console.log('51:::::::::');
+
                 } catch (err) {
                     setError(err.message); // Display error message
                 }
             })()
-            console.log('error:::', error)
-
-            // createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            //     const user = userCredential.user;
-            //     console.log("credential")
-            // })
-            // setUserinfo({
-            //     username: "",
-            //     email: "",
-            //     phoneno: "",
-            //     password: ""
-            // })
         } else {
             alert("please fill the details")
         }
-
-
     }
 
 

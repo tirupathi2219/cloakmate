@@ -1,22 +1,20 @@
 // src/app/api/auth/register/route.js
-import { connectToDatabase } from '@/lib/mongodb';
+import { handleDB } from '@/lib/mongodb';
 import User from '@/models/user';
 import { hashPassword } from '@/utils/auth';
 
 export async function POST(req) {
-  const { username, password } = await req.json();
+  const { username, password,email,phoneno } = await req.json();
   
-  const { db } = await connectToDatabase();
-  console.log("user===",{username,password,db,User,req})
-  const existingUser = await User.findOne({ username });
-
+  const db = await handleDB();
+  const existingUser = await User.findOne({ email });
   if (existingUser) {
     return new Response(JSON.stringify({ error: 'User already exists' }), { status: 400 });
   }
 
   const passwordHash = await hashPassword(password);
-  const user = new User({ username, passwordHash });
+  const user = new User({ email, passwordHash,username,phoneno });
   await user.save();
 
-  return new Response(JSON.stringify({ message: 'User registered' }), { status: 201 });
+  return new Response(JSON.stringify({ message: 'User registered',user:user }), { status: 200 });
 }
