@@ -48,7 +48,7 @@ export default function Userdetails() {
                     const data = await response.json();
                     setMessage(data.message); // Display success message
                     console.log("50:::",);
-                    route.push(`/chat?user=${JSON.stringify(data.user)}`);
+                    route.push(`/chat`, {user: JSON.stringify(data.user)});
                     console.log('51:::::::::');
 
                 } catch (err) {
