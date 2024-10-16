@@ -49,7 +49,7 @@ export default function Userdetails() {
                     setMessage(data.message); // Display success message
                     console.log("50:::",);
                     route.push(`/chat`, {user: JSON.stringify(data.user)});
-                    console.log('51:::::::::');
+                    console.log('52:::::::::', "i have added so much code here it can get conflicts ");
 
                 } catch (err) {
                     setError(err.message); // Display error message
