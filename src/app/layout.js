@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "../globals.css";
-import MainHeader from "@/components/MainHeader";
+import Main from "@/components/Main";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -24,12 +24,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex flex-col h-screen">
-        <MainHeader/>
-        <div className="grow bg-gradient-to-r from-[#eab308] to-[#1faed942]">
-        {children}
-        </div>
-        </div>
+        <Main>
+          {children}
+        </Main>
         
       </body>
     </html>

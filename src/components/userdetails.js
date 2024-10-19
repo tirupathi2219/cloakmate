@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-// import { auth } from "@/firebase";
-// import { createUserWithEmailAndPassword } from "firebase/auth"
+import { addUser } from "@/lib/slices/userslice";
+import { useDispatch } from "react-redux";
 
 export default function Userdetails() {
-    const route = useRouter()
+    const route = useRouter();
+    const dispatch = useDispatch()
     const [userinfo, setUserinfo] = useState({
         username: "",
         email: "",
@@ -21,11 +22,12 @@ export default function Userdetails() {
     const handlechange = (e) => {
         setUserinfo({ ...userinfo, [e.target.name]: e.target.value })
     }
+    debugger
     const handlesubmit = (e) => {
         e.preventDefault();
         e.stopPropagation();
         if (username && email && phoneno && password) {
-            (async () => {
+            const api = async () => {
                 try {
                     const response = await fetch('/api/auth/register', {
                         method: 'POST',
@@ -46,15 +48,17 @@ export default function Userdetails() {
                         throw new Error(data.error);
                     }
                     const data = await response.json();
+                    // dispatch(addUser(data.user))
                     setMessage(data.message); // Display success message
                     console.log("50:::",);
-                    route.push(`/chat`, {user: JSON.stringify(data.user)});
+                    route.push(`/chat`);
                     console.log('51:::::::::');
 
                 } catch (err) {
                     setError(err.message); // Display error message
                 }
-            })()
+            }
+            api();
         } else {
             alert("please fill the details")
         }
