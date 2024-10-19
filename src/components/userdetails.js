@@ -1,38 +1,69 @@
 "use client"
-import { useEffect, useState } from "react"
-import { auth } from "@/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth"
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { addUser } from "@/lib/slices/userslice";
+import { useDispatch } from "react-redux";
 
 export default function Userdetails() {
+    const route = useRouter();
+    const dispatch = useDispatch()
     const [userinfo, setUserinfo] = useState({
-        Username: "",
+        username: "",
         email: "",
         phoneno: "",
         password: ""
     })
-    const { Username, email, phoneno, password } = userinfo
+    const [error, setError] = useState(null);
+    const [message, setMessage] = useState(null)
+    const { username, email, phoneno, password } = userinfo
+
     console.log(userinfo, userinfo.length, "===")
     const handlechange = (e) => {
         setUserinfo({ ...userinfo, [e.target.name]: e.target.value })
     }
+    debugger
     const handlesubmit = (e) => {
-        e.preventDefault()
-        if (Username && email && phoneno && password) {
-            alert("submitted")
-            createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-                const user = userCredential.user;
-                console.log("credential")
-            })
-            setUserinfo({
-                Username: "",
-                email: "",
-                phoneno: "",
-                password: ""
-            })
+        e.preventDefault();
+        e.stopPropagation();
+        if (username && email && phoneno && password) {
+            const api = async () => {
+                try {
+                    const response = await fetch('/api/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: username, // User registration data
+                            password: password,
+                            phoneno: phoneno,
+                            email: email
+
+                        }),
+                    });
+
+                    if (!response.ok) {
+                        const data = await response.json();
+                        throw new Error(data.error);
+                    }
+                    const data = await response.json();
+                    // dispatch(addUser(data.user))
+                    setMessage(data.message); // Display success message
+                    console.log("50:::",);
+                    route.push(`/chat`);
+                    console.log('51:::::::::');
+
+                } catch (err) {
+                    setError(err.message); // Display error message
+                }
+            }
+            api();
         } else {
             alert("please fill the details")
         }
     }
+
 
 
 
@@ -75,8 +106,8 @@ export default function Userdetails() {
                         <input
                             type="text"
                             placeholder="username"
-                            name="Username"
-                            value={Username}
+                            name="username"
+                            value={username}
                             onChange={handlechange}
                             required
                             className=" border border-slate-900 p-1 rounded-lg m-2"
