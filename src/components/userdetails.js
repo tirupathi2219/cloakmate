@@ -18,11 +18,9 @@ export default function Userdetails() {
     const [message, setMessage] = useState(null)
     const { username, email, phoneno, password } = userinfo
 
-    console.log(userinfo, userinfo.length, "===")
     const handlechange = (e) => {
         setUserinfo({ ...userinfo, [e.target.name]: e.target.value })
     }
-    debugger
     const handlesubmit = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -48,11 +46,9 @@ export default function Userdetails() {
                         throw new Error(data.error);
                     }
                     const data = await response.json();
-                    // dispatch(addUser(data.user))
+                     dispatch(addUser(data.user))
                     setMessage(data.message); // Display success message
-                    console.log("50:::",);
                     route.push(`/chat`);
-                    console.log('51:::::::::');
 
                 } catch (err) {
                     setError(err.message); // Display error message

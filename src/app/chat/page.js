@@ -7,7 +7,7 @@ export default function Chatpage() {
 
   const user = useSelector((state) => {
     console.log('13:::', state)
-    return state.user.userdata
+    return state.user.userData
   })
 
   return (
